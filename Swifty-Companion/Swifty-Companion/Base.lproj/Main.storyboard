@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Uh9-qz-JxS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,19 +23,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-LT-3qu">
-                                <rect key="frame" x="94" y="318.5" width="187.5" height="30"/>
+                                <rect key="frame" x="94" y="319" width="188" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-of-hEG">
-                                <rect key="frame" x="163.5" y="356" width="49" height="30"/>
+                                <rect key="frame" x="163" y="356" width="49" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="LKx-G9-VAB"/>
                                 </constraints>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tnx-DP-7zT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dL-hi-McZ">
+                                <rect key="frame" x="0.0" y="629" width="71" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="6vr-4f-34A"/>
+                                    <constraint firstAttribute="height" constant="30" id="b8i-3R-zBr"/>
+                                </constraints>
+                                <state key="normal" title="Token Info"/>
+                                <connections>
+                                    <action selector="tokenmButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4cH-IN-5gR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -45,21 +56,25 @@
                             <constraint firstItem="QfZ-of-hEG" firstAttribute="top" secondItem="shJ-LT-3qu" secondAttribute="bottom" constant="7.5" id="FFQ-2G-NFS"/>
                             <constraint firstItem="shJ-LT-3qu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G5c-io-kbf"/>
                             <constraint firstItem="shJ-LT-3qu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MQw-JV-SWd"/>
+                            <constraint firstItem="2dL-hi-McZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Znn-a1-BCO"/>
                             <constraint firstItem="shJ-LT-3qu" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="kZl-Za-l2h"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2dL-hi-McZ" secondAttribute="bottom" constant="8" symbolic="YES" id="xKL-3d-ADI"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="wpc-SA-Gic"/>
                     <connections>
                         <outlet property="inputField" destination="shJ-LT-3qu" id="KEI-eJ-wCc"/>
-                        <segue destination="RGF-D7-7Gc" kind="show" id="N4k-qb-AtD"/>
+                        <segue destination="RGF-D7-7Gc" kind="show" identifier="goUserView" id="N4k-qb-AtD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="527.20000000000005" y="145.27736131934034"/>
         </scene>
-        <!--View Controller-->
+        <!--User View Controller-->
         <scene sceneID="ai9-nr-lAd">
             <objects>
-                <viewController id="RGF-D7-7Gc" sceneMemberID="viewController">
+                <viewController id="RGF-D7-7Gc" customClass="UserViewController" customModule="Swifty_Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uCY-JK-D5q"/>
                         <viewControllerLayoutGuide type="bottom" id="dbA-Ha-owY"/>
@@ -88,11 +103,20 @@
                                                     <constraint firstAttribute="height" constant="300" id="yBA-r8-dxv"/>
                                                 </constraints>
                                             </tableView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Nz-lw-bvA">
+                                                <rect key="frame" x="8" y="8" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="MNc-aL-zmP"/>
+                                                    <constraint firstAttribute="width" constant="120" id="qtw-WR-c9f"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="aeY-2K-NQE" firstAttribute="width" secondItem="Qx3-g3-3rF" secondAttribute="width" multiplier="0.8" id="4J9-oR-OUp"/>
                                             <constraint firstItem="Caw-HJ-vkK" firstAttribute="width" secondItem="Qx3-g3-3rF" secondAttribute="width" multiplier="0.8" id="CcJ-e9-TXL"/>
+                                            <constraint firstItem="6Nz-lw-bvA" firstAttribute="top" secondItem="Qx3-g3-3rF" secondAttribute="top" constant="8" id="OLe-Iw-Tmw"/>
+                                            <constraint firstItem="6Nz-lw-bvA" firstAttribute="leading" secondItem="Qx3-g3-3rF" secondAttribute="leading" constant="8" id="axE-r4-0Qh"/>
                                             <constraint firstItem="Caw-HJ-vkK" firstAttribute="top" secondItem="aeY-2K-NQE" secondAttribute="bottom" constant="8" id="b94-Fr-5Ae"/>
                                             <constraint firstItem="aeY-2K-NQE" firstAttribute="centerX" secondItem="Qx3-g3-3rF" secondAttribute="centerX" id="bgo-12-Mkl"/>
                                             <constraint firstAttribute="height" constant="1000" id="eIx-1s-Ioi"/>
@@ -120,10 +144,31 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="userImage" destination="6Nz-lw-bvA" id="hyZ-1z-ryE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAf-MF-y2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="185"/>
+            <point key="canvasLocation" x="1496.8" y="293.25337331334333"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sU5-ul-Zyw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uh9-qz-JxS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UvD-Vx-TUN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Rhs-VR-D3w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7kl-0o-gnx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-412" y="145.27736131934034"/>
         </scene>
     </scenes>
 </document>

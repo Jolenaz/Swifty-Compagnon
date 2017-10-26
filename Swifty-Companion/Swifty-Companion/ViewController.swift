@@ -15,16 +15,31 @@ class ViewController: UIViewController {
     let uid = "794b712f87193b4a8355cae6f0293b389f05c40cdfbf67405f9a1d1c78208793"
     let secret = "30fb79299c9cac555e28d63b98ca92b7350d9616ca911e910cc68001c2504376"
     
-    var token : String = "2b549bdcdeab4691e45bee58ed177c0dc60d83523a4e9f93f287ce57590eea9e"
+    var token0 : String = "2b549bdcdeab4691e45bee58ed177c0dc60d83523a4e9f93f287ce57590eea9e"
+    var token : String?
     var jsonResponse : JSON?{
         didSet{
-            print ("get Token")
+            self.token = jsonResponse!["access_token"].string
+        }
+    }
+    
+    var user : User?{
+        didSet{
+            performSegue(withIdentifier: "goUserView", sender: "")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goUserView"{
+            if  let dest = segue.destination as? UserViewController{
+                dest.user = self.user
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getToken()
+        getToken()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -55,9 +70,13 @@ class ViewController: UIViewController {
     }
     @IBOutlet weak var inputField: UITextField!
 
+    @IBAction func tokenmButton(_ sender: UIButton) {
+    
+    
+    }
+    
     @IBAction func submitButton(_ sender: UIButton) {
-        let pa = "Bearer \(self.token)"
-        print (pa)
+        let pa = "Bearer \(self.token!)"
         let headers : HTTPHeaders = [
             "Authorization" : pa
         ]
@@ -66,14 +85,13 @@ class ViewController: UIViewController {
             response in
             switch response.result{
             case .success(let value):
-                let info = JSON(value)
-                print ("Success : ")
-                print (info)
+                let ret = JSON(value)
+                if ret.isEmpty { print("a girl has no name") }
+                else {self.user = User(info: ret)}
             case .failure(let error):
                 print ("Error : ")
                 print (error)
             }
-            
         }
     
     }

@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     let uid = "794b712f87193b4a8355cae6f0293b389f05c40cdfbf67405f9a1d1c78208793"
     let secret = "30fb79299c9cac555e28d63b98ca92b7350d9616ca911e910cc68001c2504376"
     
-    var token0 : String = "2b549bdcdeab4691e45bee58ed177c0dc60d83523a4e9f93f287ce57590eea9e"
+    @IBOutlet var background: UIView!
+    
     var token : String?
+    
     var jsonResponse : JSON?{
         didSet{
             self.token = jsonResponse!["access_token"].string
@@ -40,14 +42,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getToken()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        background.backgroundColor = UIColor(patternImage: UIImage(named : "ecole_42")!)
     }
     
+    @IBOutlet weak var inputField: UITextField!
+
     func getToken(){
         
         let parameters : Parameters = [
@@ -68,18 +67,38 @@ class ViewController: UIViewController {
         }
         
     }
-    @IBOutlet weak var inputField: UITextField!
-
+    
     @IBAction func tokenmButton(_ sender: UIButton) {
-    
-    
-    }
-    
-    @IBAction func submitButton(_ sender: UIButton) {
+        if self.token == nil {return}
         let pa = "Bearer \(self.token!)"
         let headers : HTTPHeaders = [
             "Authorization" : pa
         ]
+        
+        Alamofire.request("https://api.intra.42.fr/oauth/token/info" , method: .get, headers : headers).responseJSON{
+            response in
+            switch response.result{
+            case .success(let value):
+                let ret = JSON(value)
+                let alert = UIAlertController(title: "Token Information", message: ret.description, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            case .failure(let error):
+                print ("Error : ")
+                print (error)
+            }
+        }
+    
+    }
+    
+    @IBAction func submitButton(_ sender: UIButton) {
+        if self.token == nil {return}
+        let pa = "Bearer \(self.token!)"
+        let headers : HTTPHeaders = [
+            "Authorization" : pa
+        ]
+        
+        if self.inputField.text! == "" {return}
         
         Alamofire.request("https://api.intra.42.fr/v2/users/\(self.inputField.text!)" , method: .get, headers : headers).responseJSON{
             response in

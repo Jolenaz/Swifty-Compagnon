@@ -14,6 +14,9 @@
 		1089DE5A1F9F7CEC00B24D34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1089DE581F9F7CEC00B24D34 /* LaunchScreen.storyboard */; };
 		10A18F131FA0D1A800875E64 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A18F121FA0D1A800875E64 /* UserViewController.swift */; };
 		10A18F151FA0DC3700875E64 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A18F141FA0DC3700875E64 /* User.swift */; };
+		10E34CB91FA363CA00145A09 /* skillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E34CB81FA363CA00145A09 /* skillTableViewCell.swift */; };
+		10E34CBB1FA37B5400145A09 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E34CBA1FA37B5400145A09 /* AchievementTableViewCell.swift */; };
+		10E34CBD1FA3895400145A09 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E34CBC1FA3895400145A09 /* ProjectTableViewCell.swift */; };
 		61070B1F1C7EBFF9020F193E /* Pods_Swifty_Companion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A66D184447639F7E48988C8 /* Pods_Swifty_Companion.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 		1089DE5B1F9F7CEC00B24D34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10A18F121FA0D1A800875E64 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		10A18F141FA0DC3700875E64 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		10E34CB81FA363CA00145A09 /* skillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = skillTableViewCell.swift; sourceTree = "<group>"; };
+		10E34CBA1FA37B5400145A09 /* AchievementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementTableViewCell.swift; sourceTree = "<group>"; };
+		10E34CBC1FA3895400145A09 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		3A66D184447639F7E48988C8 /* Pods_Swifty_Companion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Companion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA53E3B0B43405E7CBFA5C /* Pods-Swifty-Companion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty-Companion.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty-Companion/Pods-Swifty-Companion.release.xcconfig"; sourceTree = "<group>"; };
 		6729079E16530597A3F8B050 /* Pods-Swifty-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty-Companion.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty-Companion/Pods-Swifty-Companion.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +75,9 @@
 				1089DE511F9F7CEC00B24D34 /* ViewController.swift */,
 				10A18F121FA0D1A800875E64 /* UserViewController.swift */,
 				1089DE531F9F7CEC00B24D34 /* Main.storyboard */,
+				10E34CB81FA363CA00145A09 /* skillTableViewCell.swift */,
+				10E34CBA1FA37B5400145A09 /* AchievementTableViewCell.swift */,
+				10E34CBC1FA3895400145A09 /* ProjectTableViewCell.swift */,
 				10A18F141FA0DC3700875E64 /* User.swift */,
 				1089DE561F9F7CEC00B24D34 /* Assets.xcassets */,
 				1089DE581F9F7CEC00B24D34 /* LaunchScreen.storyboard */,
@@ -226,9 +235,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A18F151FA0DC3700875E64 /* User.swift in Sources */,
+				10E34CBD1FA3895400145A09 /* ProjectTableViewCell.swift in Sources */,
+				10E34CBB1FA37B5400145A09 /* AchievementTableViewCell.swift in Sources */,
 				1089DE521F9F7CEC00B24D34 /* ViewController.swift in Sources */,
 				10A18F131FA0D1A800875E64 /* UserViewController.swift in Sources */,
 				1089DE501F9F7CEC00B24D34 /* AppDelegate.swift in Sources */,
+				10E34CB91FA363CA00145A09 /* skillTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

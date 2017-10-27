@@ -16,15 +16,18 @@ struct Skill {
 
 struct Project {
     var id : Int?
+    var name : String?
+    var slug : String?
     var mark : Int?
+    var status : String?
     var validated : Bool?
     var children : [Project]?
 }
 
 struct Achievement {
     var name : String?
-    var descricptio : String?
-    var image : String?
+    var descricption : String?
+    
 }
 
 class User: NSObject {
@@ -40,9 +43,9 @@ class User: NSObject {
     var wallet : Int?
     var isStaff : Bool = false
     
-    var skills : [Skill]?
-    var projects : [Project]?
-    var achievements : [Achievement]?
+    var skills : [Skill] = []
+    var projects : [Project] = []
+    var achievements : [Achievement] = []
     
     init(info : JSON) {
         self.firstName = info["first_name"].string
@@ -59,9 +62,23 @@ class User: NSObject {
                 if cur["cursus_id"].int == 1{
                     self.grade = cur["grade"].string
                     self.level = cur["level"].float
+                    if let skills = cur["skills"].array{
+                        for skill in skills{
+                            let newSkill = Skill(name: skill["name"].string, level: skill["level"].float)
+                            self.skills.append(newSkill)
+                        }
+                    }
                 }
             }
         }
+        if let achievements = info["achievements"].array{
+            for ach in achievements{
+                let newAch = Achievement(name: ach["name"].string, descricption: ach["description"].string)
+                self.achievements.append(newAch)
+            }
+            
+        }
+        
     }
     
     override var description: String{

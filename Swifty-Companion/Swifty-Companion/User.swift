@@ -21,6 +21,7 @@ struct Project {
     var mark : Int?
     var status : String?
     var validated : Bool?
+    var hasChildren : Bool?
     var children : [Project]?
 }
 
@@ -46,6 +47,7 @@ class User: NSObject {
     var skills : [Skill] = []
     var projects : [Project] = []
     var achievements : [Achievement] = []
+    var tmpProj : [Int:[Project]] = [:]
     
     init(info : JSON) {
         self.firstName = info["first_name"].string
@@ -78,7 +80,35 @@ class User: NSObject {
             }
             
         }
-        
+        if let projects = info["projects_users"].array{
+            for proj in projects{
+                if let cId = proj["cursus_ids"].array{
+                    if cId[0] != 1{
+                        continue
+                    }
+                }
+                if let pInfo = proj["project"].dictionary{
+                    let newProj = Project(id: pInfo["id"]?.int, name: pInfo["name"]?.string, slug: pInfo["slug"]?.string, mark: proj["final_mark"].int, status: proj["status"].string, validated: proj["validated?"].bool, hasChildren: false, children: nil)
+                    if let parent = pInfo["parent_id"]?.int{
+                        if (tmpProj[parent] == nil){
+                            tmpProj[parent] = []
+                        }
+                        tmpProj[parent]!.append(newProj)
+                    }
+                    else{
+                        self.projects.append(newProj)
+                    }
+                }
+            }
+        }
+        for (tmpKey,tmpValue) in tmpProj{
+            for index in 0...(projects.count - 1){
+                if projects[index].id == tmpKey{
+                    projects[index].children = tmpValue
+                    projects[index].hasChildren = true
+                }
+            }
+        }
     }
     
     override var description: String{

@@ -85,6 +85,22 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UITableViewCell()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goSubProject"{
+            if let dest =  segue.destination as? ProjectViewController{
+                dest.parentProject = sender as? Project
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == projectTableView{
+            if self.user!.projects[indexPath.row].hasChildren ?? false{
+                performSegue(withIdentifier: "goSubProject", sender: self.user!.projects[indexPath.row])
+            }
+        }
+    }
+    
     func printInfo(){
         levelLabel.text = "level : \(self.user!.level ?? 0.0) grade : \(self.user!.grade ?? "no One")"
         let levelBAr = UIView(frame: CGRect( x : 0 , y : 0, width :  CGFloat(self.user!.level! - floor(self.user!.level!)) * levelView.frame.width, height : 40))

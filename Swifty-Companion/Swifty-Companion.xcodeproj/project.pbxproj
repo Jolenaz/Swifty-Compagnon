@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103D52601FA739300052B5EE /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103D525F1FA739300052B5EE /* ProjectViewController.swift */; };
 		1089DE501F9F7CEC00B24D34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1089DE4F1F9F7CEC00B24D34 /* AppDelegate.swift */; };
 		1089DE521F9F7CEC00B24D34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1089DE511F9F7CEC00B24D34 /* ViewController.swift */; };
 		1089DE551F9F7CEC00B24D34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1089DE531F9F7CEC00B24D34 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103D525F1FA739300052B5EE /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		1089DE4C1F9F7CEC00B24D34 /* Swifty-Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty-Companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1089DE4F1F9F7CEC00B24D34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1089DE511F9F7CEC00B24D34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				1089DE511F9F7CEC00B24D34 /* ViewController.swift */,
 				10A18F121FA0D1A800875E64 /* UserViewController.swift */,
 				1089DE531F9F7CEC00B24D34 /* Main.storyboard */,
+				103D525F1FA739300052B5EE /* ProjectViewController.swift */,
 				10E34CB81FA363CA00145A09 /* skillTableViewCell.swift */,
 				10E34CBA1FA37B5400145A09 /* AchievementTableViewCell.swift */,
 				10E34CBC1FA3895400145A09 /* ProjectTableViewCell.swift */,
@@ -238,6 +241,7 @@
 				10E34CBD1FA3895400145A09 /* ProjectTableViewCell.swift in Sources */,
 				10E34CBB1FA37B5400145A09 /* AchievementTableViewCell.swift in Sources */,
 				1089DE521F9F7CEC00B24D34 /* ViewController.swift in Sources */,
+				103D52601FA739300052B5EE /* ProjectViewController.swift in Sources */,
 				10A18F131FA0D1A800875E64 /* UserViewController.swift in Sources */,
 				1089DE501F9F7CEC00B24D34 /* AppDelegate.swift in Sources */,
 				10E34CB91FA363CA00145A09 /* skillTableViewCell.swift in Sources */,

@@ -17,13 +17,9 @@ class ViewController: UIViewController {
     
     @IBOutlet var background: UIView!
     
-    var token : String?
+    var token : JSON?
     
-    var jsonResponse : JSON?{
-        didSet{
-            self.token = jsonResponse!["access_token"].string
-        }
-    }
+    var loading = false
     
     var user : User?{
         didSet{
@@ -45,6 +41,10 @@ class ViewController: UIViewController {
         background.backgroundColor = UIColor(patternImage: UIImage(named : "ecole_42")!)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.loading = false
+    }
+    
     @IBOutlet weak var inputField: UITextField!
 
     func getToken(){
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             response in
             switch response.result{
             case .success(let value):
-                self.jsonResponse = JSON(value)
+                self.token = JSON(value)
             case .failure(let error):
                 print (error)
             }
@@ -70,7 +70,12 @@ class ViewController: UIViewController {
     
     @IBAction func tokenmButton(_ sender: UIButton) {
         if self.token == nil {return}
-        let pa = "Bearer \(self.token!)"
+        if self.isTokenValide() == false {
+            token = nil
+            getToken()
+            return
+        }
+        let pa = "Bearer \(self.token?["access_token"].string ?? "")"
         let headers : HTTPHeaders = [
             "Authorization" : pa
         ]
@@ -88,28 +93,45 @@ class ViewController: UIViewController {
                 print (error)
             }
         }
+    }
     
+    func isTokenValide() -> Bool{
+        return (7200 - Int(Date().timeIntervalSince1970) + (self.token?["created_at"].int ?? 0) ) > 0
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        if self.token == nil {return}
-        let pa = "Bearer \(self.token!)"
+        if self.token == nil || self.loading{
+            return
+        }
+        if self.isTokenValide() == false {
+            token = nil
+            getToken()
+            return
+        }
+        self.loading = true
+        let pa = "Bearer \(self.token?["access_token"].string ?? "")"
         let headers : HTTPHeaders = [
             "Authorization" : pa
         ]
         
-        if self.inputField.text! == "" {return}
+        if self.inputField.text! == "" {self.loading = false;return}
         
         Alamofire.request("https://api.intra.42.fr/v2/users/\(self.inputField.text!)" , method: .get, headers : headers).responseJSON{
             response in
+            self.loading = false
             switch response.result{
             case .success(let value):
                 let ret = JSON(value)
-                if ret.isEmpty { print("a girl has no name") }
+                if ret.isEmpty {
+                    let alert = UIAlertController(title: "Invalid User", message: "This user was not found", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
                 else {self.user = User(info: ret)}
-            case .failure(let error):
-                print ("Error : ")
-                print (error)
+            case .failure(_):
+                let alert = UIAlertController(title: "Invalid User", message: "This user was not found", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     

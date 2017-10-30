@@ -70,6 +70,9 @@ class User: NSObject {
                             self.skills.append(newSkill)
                         }
                     }
+                }else{
+                    self.grade = "no grade"
+                    self.level = 0
                 }
             }
         }

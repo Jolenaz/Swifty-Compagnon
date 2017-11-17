@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     let uid = "794b712f87193b4a8355cae6f0293b389f05c40cdfbf67405f9a1d1c78208793"
     let secret = "30fb79299c9cac555e28d63b98ca92b7350d9616ca911e910cc68001c2504376"
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         getToken()
         background.backgroundColor = UIColor(patternImage: UIImage(named : "ecole_42")!)
+        self.inputField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +48,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var inputField: UITextField!
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.submitFunc()
+        return true
+    }
+    
     func getToken(){
         
         let parameters : Parameters = [
@@ -60,6 +66,7 @@ class ViewController: UIViewController {
             switch response.result{
             case .success(let value):
                 self.token = JSON(value)
+                print (self.token)
             case .failure(let error):
                 print (error)
             }
@@ -100,6 +107,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
+        self.submitFunc()
+    }
+    
+    func submitFunc(){
         if self.token == nil || self.loading{
             return
         }

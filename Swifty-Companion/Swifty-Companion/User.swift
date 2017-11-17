@@ -50,6 +50,7 @@ class User: NSObject {
     var tmpProj : [Int:[Project]] = [:]
     
     init(info : JSON) {
+        print (info)
         self.firstName = info["first_name"].string
         self.lastName = info["last_name"].string
         self.login = info["login"].string
@@ -59,9 +60,11 @@ class User: NSObject {
         self.image = info["image_url"].string
         self.wallet = info["wallet"].int
         if (info["staff?"].boolValue){self.isStaff = true}
+        var load = false
         if let cursus = info["cursus_users"].array{
             for cur in cursus{
                 if cur["cursus_id"].int == 1{
+                    load = true
                     self.grade = cur["grade"].string
                     self.level = cur["level"].float
                     if let skills = cur["skills"].array{
@@ -70,11 +73,13 @@ class User: NSObject {
                             self.skills.append(newSkill)
                         }
                     }
-                }else{
-                    self.grade = "no grade"
-                    self.level = 0
                 }
             }
+            if load == false{
+                self.grade = "no grade"
+                self.level = 0
+            }
+            
         }
         if let achievements = info["achievements"].array{
             for ach in achievements{
@@ -86,7 +91,7 @@ class User: NSObject {
         if let projects = info["projects_users"].array{
             for proj in projects{
                 if let cId = proj["cursus_ids"].array{
-                    if cId[0] != 1{
+                    if cId.count == 0 || cId[0] != 1{
                         continue
                     }
                 }

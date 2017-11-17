@@ -103,6 +103,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func printInfo(){
         levelLabel.text = "level : \(self.user!.level ?? 0.0) grade : \(self.user!.grade ?? "no One")"
+        if self.user!.level == nil{
+            self.user!.level = 0.0
+        }
         let levelBAr = UIView(frame: CGRect( x : 0 , y : 0, width :  CGFloat(self.user!.level! - floor(self.user!.level!)) * levelView.frame.width, height : 40))
         levelBAr.backgroundColor = UIColor(colorLiteralRed: 1.0/255, green: 185.0/255, blue: 188.0/255, alpha: 1)
         levelView.addSubview(levelBAr)
@@ -125,10 +128,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var correctionLabel: UILabel!
     
     func getImage(){
-        if let url = URL(string: self.user!.image!){
-            if let donnee = try? Data(contentsOf: url){
-                self.userImage.image = UIImage(data: donnee)
+        if let im = self.user!.image{
+            if let url = URL(string: im){
+                if let donnee = try? Data(contentsOf: url){
+                    self.userImage.image = UIImage(data: donnee)
+                }
             }
+        }else{
+            self.userImage.image = UIImage(named: "default_user")
         }
     }
     
